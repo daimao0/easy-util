@@ -42,7 +42,7 @@ public class Convert {
      * @param object 被转换的值
      * @return 结果
      */
-    public static String toDatetimeStr(Object object) {
+    public static String toDateTimeStr(Object object) {
         return toDateStr(object, DatePattern.YYYY_MM_DD_HH_MM_SS);
     }
 

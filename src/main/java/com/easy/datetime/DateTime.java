@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * @date: 2024-11-20 20:36
  */
 @SuppressWarnings("ALL")
-public class Datetime {
+public class DateTime {
     /**
      * 时间对象
      */
@@ -20,7 +20,7 @@ public class Datetime {
     /**
      * 构造函数
      */
-    public Datetime() {
+    public DateTime() {
         this.localDateTime = LocalDateTime.now();
     }
 
@@ -29,7 +29,7 @@ public class Datetime {
      *
      * @param localDateTime
      */
-    public Datetime(LocalDateTime localDateTime) {
+    public DateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
     }
 
@@ -38,8 +38,8 @@ public class Datetime {
      *
      * @return
      */
-    public static Datetime now() {
-        return new Datetime();
+    public static DateTime now() {
+        return new DateTime();
     }
 
     /**
@@ -47,8 +47,8 @@ public class Datetime {
      *
      * @return
      */
-    public Datetime startOfDay() {
-        return new Datetime(this.localDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0));
+    public DateTime startOfDay() {
+        return new DateTime(this.localDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0));
     }
 
     /**
@@ -56,8 +56,8 @@ public class Datetime {
      *
      * @return
      */
-    public Datetime endOfDay() {
-        return new Datetime(this.localDateTime.withHour(23).withMinute(59).withSecond(59).withNano(999999999));
+    public DateTime endOfDay() {
+        return new DateTime(this.localDateTime.withHour(23).withMinute(59).withSecond(59).withNano(999999999));
     }
 
     /**
@@ -66,6 +66,6 @@ public class Datetime {
      * @return
      */
     public String toString() {
-        return Convert.toDatetimeStr(this.localDateTime);
+        return Convert.toDateTimeStr(this.localDateTime);
     }
 }

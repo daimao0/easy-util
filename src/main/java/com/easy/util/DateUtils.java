@@ -48,7 +48,7 @@ public class DateUtils {
      * @return 当前日期
      */
     public static String getCurrentDatetimeStr() {
-        return Convert.toDatetimeStr(LocalDateTime.now());
+        return Convert.toDateTimeStr(LocalDateTime.now());
     }
 
     /**
@@ -65,8 +65,8 @@ public class DateUtils {
         StringBuilder hour = new StringBuilder();
         StringBuilder minute = new StringBuilder();
         StringBuilder second = new StringBuilder();
-
-        int count = 0;  // 记录已经提取的数字数量
+        // 记录已经提取的数字数量
+        int count = 0;
 
         for (char c : dateString.toCharArray()) {
             if (Character.isDigit(c)) {
@@ -146,6 +146,7 @@ public class DateUtils {
                 case 19:
                     sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     return sdf.parse(sb.toString());
+                default:
             }
             // 使用 SimpleDateFormat 解析日期时间字符串
         } catch (ParseException e) {

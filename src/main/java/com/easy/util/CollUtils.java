@@ -53,6 +53,7 @@ public class CollUtils {
      *
      * @param collection 集合
      * @param <T>        集合元素类型
+     * @param sampleSize 样本数量
      * @return 抽样后的集合
      */
     public static <T> List<T> sampling(Collection<T> collection, int sampleSize) {
