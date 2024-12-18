@@ -30,4 +30,14 @@ public class StrUtils {
     public static boolean isBlank(CharSequence str) {
         return !isNotBlank(str);
     }
+
+    /**
+     * 判断是否为数字
+     *
+     * @param str 字符串
+     * @return 是否为数字
+     */
+    public static boolean isNumber(String str) {
+        return str.matches("^[-+]?\\d*\\.?\\d+$");
+    }
 }

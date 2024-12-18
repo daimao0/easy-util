@@ -247,4 +247,22 @@ public class Convert {
         }
         return null;
     }
+
+    /**
+     * 将字符串转换为Long类型
+     * @param str 字符串
+     * @return Long类型
+     */
+    public static Long toLong(String str) {
+        return Long.valueOf(str);
+    }
+
+    /**
+     * 将字符串转换为Integer类型
+     * @param str 字符串
+     * @return Integer类型
+     */
+    public static Integer toInteger(String str) {
+        return Integer.valueOf(str);
+    }
 }

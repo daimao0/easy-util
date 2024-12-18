@@ -1,6 +1,8 @@
 package com.easy.util;
 
 
+import com.easy.constant.StrConstant;
+
 import java.util.*;
 
 /**
@@ -100,7 +102,8 @@ public class CsvUtils {
     public static String toLineStr(List<Object> row) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < row.size(); i++) {
-            String cellStr = row.get(i).toString();
+            Object cell = row.get(i);
+            String cellStr = cell == null ? StrConstant.BLANK : cell.toString();
             if (cellStr.contains(SEPARATOR)) {
                 sb.append(BORDER).append(cellStr).append(BORDER);
             } else {
@@ -149,7 +152,7 @@ public class CsvUtils {
                 continue;
             }
             //如果存在跨界
-            if (sb.length()!=0) {
+            if (sb.length() != 0) {
                 sb.append(item);
                 continue;
             }
