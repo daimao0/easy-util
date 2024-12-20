@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 
 /**
- * @author: yanchenyang958@hellobike.com
+ * @author: daimao
  * @date: 2024-10-21 16:17
  */
 @Data

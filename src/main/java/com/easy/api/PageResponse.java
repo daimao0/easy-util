@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 /**
  * 分页响应
  *
- * @author: yanchenyang958@hellobike.com
+ * @author: daimao
  * @date: 2023-01-04 2:38 PM
  */
 @Data

@@ -2,7 +2,6 @@ package com.easy.api;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -10,7 +9,7 @@ import lombok.experimental.Accessors;
 import java.util.List;
 
 /**
- * @author yanchenyang17958
+ * @author daimao
  */
 @Data
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class Page<T> {
     /**
      * 当前页
      */
-    private Long page;
+    private Long current;
     /**
      * 页面大小
      */
@@ -36,9 +35,9 @@ public class Page<T> {
     private Long total;
 
 
-    public static <T> Page<T> toPage(Long page, Long size, Long total, List<T> data) {
+    public static <T> Page<T> toPage(Long current, Long size, Long total, List<T> data) {
         Page<T> twoWheelOrderInfoPage = new Page<>();
-        twoWheelOrderInfoPage.setPage(page);
+        twoWheelOrderInfoPage.setCurrent(current);
         twoWheelOrderInfoPage.setSize(size);
         twoWheelOrderInfoPage.setTotal(total);
         twoWheelOrderInfoPage.setData(data);
