@@ -171,7 +171,7 @@ public class CsvUtils {
      * @return CSV字符
      */
     public static String genCsvStr(List<Map<String, Object>> data, String spearator) {
-        if (CollUtil.isEmpty(data)) {
+        if (CollUtils.isEmpty(data)) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
