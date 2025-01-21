@@ -4,7 +4,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.util.ConverterUtils;
-import com.easy.util.StrUtils;
 import lombok.Getter;
 
 import java.util.*;
@@ -21,20 +20,33 @@ public class NoModeDataListener extends AnalysisEventListener<Map<String, String
      * 获得表格数据
      */
     @Getter
-    private final List<Map<String, Object>> dataList = new ArrayList<>();
+    private final List<Map<String, Object>> dataList = new ArrayList<>(100);
     private Map<Integer, String> head = null;
 
     @Override
     public void invoke(Map<String, String> data, AnalysisContext context) {
+        //列头名称重复次数
+        Map<String, Integer> headCount = new HashMap<>();
         // 这里可以获取到每行的数据，data是一个Map，key是列名，value是单元格值
         Map<String, Object> rowMap = new LinkedHashMap<>();
-        for (Object key : data.keySet()) {
-            String headValue = head.get(key);
-            if (StrUtils.isNotBlank(headValue)){
-                rowMap.put(headValue, data.get(key));
-                rowMap.remove(key);
+
+        //遍历当前row
+        head.forEach((k,v)->{
+            String cell = data.get(k) == null ? "" : data.get(k);
+            char ch = (char) ('A' + k);
+            String headValue = head.get(k) == null ? ch + "1" : head.get(k);
+            if (headCount.get(headValue) == null) {
+                headCount.put(headValue, 0);
+            } else {
+                headCount.put(headValue, headCount.get(headValue) + 1);
             }
-        }
+            Integer count = headCount.get(headValue);
+            if (count >= 1) {
+                headValue = String.format("%s(%d)", headValue, count);
+            }
+            rowMap.put(headValue, cell);
+            rowMap.remove(k);
+        });
         dataList.add(rowMap);
     }
 

@@ -4,6 +4,7 @@ package com.easy.util;
 import com.easy.constant.StrConstant;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 操作csv文件；
@@ -160,5 +161,71 @@ public class CsvUtils {
             result.add(item);
         }
         return result;
+    }
+
+    /**
+     * 生成CSV字符
+     *
+     * @param data      数据
+     * @param spearator 分隔符
+     * @return CSV字符
+     */
+    public static String genCsvStr(List<Map<String, Object>> data, String spearator) {
+        if (CollUtil.isEmpty(data)) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        //生成headStr
+        List<String> head = new ArrayList<>(data.get(0).keySet());
+        for (int i = 0; i < head.size(); i++) {
+            sb.append(head.get(i));
+            if (i < head.size() - 1) {
+                sb.append(spearator);
+            }
+        }
+        sb.append("\n");
+        //formdata
+        data.forEach(item -> {
+            int size = item.size();
+            AtomicInteger i = new AtomicInteger();
+            item.forEach((k, v) -> {
+                sb.append(v);
+                if (i.getAndIncrement() < size - 1) {
+                    sb.append(spearator);
+                }
+            });
+            sb.append("\n");
+        });
+        return sb.toString();
+    }
+
+    /**
+     * 解析CSV
+     *
+     * @param content   csv内容
+     * @param spearator 分隔符
+     * @return 解析后的数据
+     */
+    public static List<Map<String, Object>> parseCsv(String content, String spearator) {
+        if (StrUtils.isBlank(content)){
+            return Collections.emptyList();
+        }
+        String[] lineArr = content.split("\n");
+        if (lineArr.length == 0) {
+            return Collections.emptyList();
+        }
+        List<Map<String,Object>> data = new ArrayList<>(lineArr.length-1);
+        String head = lineArr[0];
+        String[] keys = head.split(spearator);
+        for (int i = 1; i < lineArr.length; i++) {
+            String line = lineArr[i];
+            String[] cell = line.split(spearator);
+            Map<String, Object> lineMap = new HashMap<>();
+            for (int k = 0; k < cell.length; k++) {
+                lineMap.put(keys[k],cell[k]);
+            }
+            data.add(lineMap);
+        }
+        return data;
     }
 }
